@@ -1,0 +1,6 @@
+FROM golang:1.23-alpine
+WORKDIR /app
+COPY . .
+RUN go build -o mock .
+CMD ["./mock"]
+EXPOSE 5000
