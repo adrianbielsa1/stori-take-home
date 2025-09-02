@@ -27,10 +27,8 @@ func (p *Proxy) Handle(ctx *gin.Context) {
 
 	url := target + path
 
-	fmt.Println(path)
-	fmt.Println(url)
-
 	req, err := http.NewRequest(ctx.Request.Method, url, ctx.Request.Body)
+
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Error creating request"})
 		return
