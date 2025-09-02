@@ -1,0 +1,28 @@
+services:
+  gateway:
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile.gateway
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./gateway/config.yaml:/app/config.yaml
+    depends_on:
+      - mock
+    networks:
+      - stori-net
+
+  mock:
+    build:
+      context: ./mock
+      dockerfile: Dockerfile.mock
+    ports:
+      - "5005:5005"
+    volumes:
+      - ./mock/config.yaml:/app/config.yaml
+    networks:
+      - stori-net
+
+networks:
+  stori-net:
+    driver: bridge
