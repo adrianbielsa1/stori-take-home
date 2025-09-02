@@ -41,8 +41,8 @@ func main() {
 	router.Use(ValidateRequestID())
 	router.Use(ValidateAPIKey(store))
 
-	router.GET("/:service/*path", proxy.Handle)
-	router.POST("/:service/*path", proxy.Handle)
+	router.GET("/api/:service/*path", proxy.Handle)
+	router.POST("/api/:service/*path", proxy.Handle)
 
 	if err := router.Run(":8080"); err != nil {
 		log.Fatal(err)
