@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"io"
-	"log"
 	"maps"
 	"net/http"
 
@@ -49,20 +48,4 @@ func (p *Proxy) Handle(ctx *gin.Context) {
 
 	ctx.Status(resp.StatusCode)
 	io.Copy(ctx.Writer, resp.Body)
-}
-
-func ReloadConfigHandler(store *ConfigurationStore, path string) gin.HandlerFunc {
-	return func(ctx *gin.Context) {
-		newCfg, err := LoadConfig(path)
-
-		if err != nil {
-			log.Println("Config reload failed:", err)
-			ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to reload config"})
-			return
-		}
-
-		store.Update(newCfg)
-		log.Println("Config reloaded successfully")
-		ctx.JSON(http.StatusOK, gin.H{"status": "reloaded"})
-	}
 }
