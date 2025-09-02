@@ -1,0 +1,5 @@
+apiKey: abc
+services:
+  adrian: http://mock:5005/nairda
+  alfonso: http://mock:5005/osnofla
+  pablo: http://mock:5005/olbap
